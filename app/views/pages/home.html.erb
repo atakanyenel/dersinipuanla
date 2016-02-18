@@ -1,0 +1,39 @@
+
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1 style="color :rgb(15,250,0)">Ders Yorumları</h1>
+                        <h3 style="color :rgb(150,1200,255)">Dersini Seç ve İnsanlar Ne Yazmış Gör</h3>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                             
+
+        <li role="presentation" class="dropdown">
+      <%= form_for :trip, url: {action: "show"}, html: {method: "get"} do |f| %>
+    
+  <%= f.select :university_id, options_for_select(@universities.collect { |u|
+    [u.name.titleize, u.id] }, 0), {:include_blank=> "Üniversite Seç"}, { id: 'universities_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+    
+  <%= f.select :id, options_for_select(@courses.collect { |c|
+    [c.name.titleize, c.id] },0), {:include_blank=>"Ders Seç"}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+  
+  
+  <%= f.submit "Bul!" ,{class:'btn btn-default btn-lg',id:'find_button'}%>
+  </li>
+<% end %>                    
+
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>

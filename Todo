@@ -1,0 +1,11 @@
+*pages controller generated
+
+*Comment model generated
+
+*pages#home -> root
+
+*Favicon 'book.ico' added
+
+*gemfile bootstrap added
+
+Problems with dropdowns ==> application.js updated ==> move //= require jquery below //=require bootstrap
