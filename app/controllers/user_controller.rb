@@ -44,12 +44,13 @@ class UserController < ApplicationController
 			session[:lastname]=params[:user][:lastname]
 			session[:email]=params[:user][:email]
 			session[:university_id]=params[:user][:university_id]
-			random=rand(36**8).to_s(36)
+			#random=rand(36**8).to_s(36)
+			random='atakan'
 			session[:random]=random
 
 			usermail=session[:email]+'@'+University.find(session[:university_id]).mail
 			session[:usermail]=usermail
-			UserNotifier.send_signup_email(session[:first_name],usermail,random).deliver
+			#UserNotifier.send_signup_email(session[:first_name],usermail,random).deliver
 			puts random
 			redirect_to "/checkcode"
 		end
