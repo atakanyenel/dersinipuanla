@@ -1,0 +1,58 @@
+
+<ul class="list-inline intro-social-buttons">
+
+<div class="intro-header">
+        <li role="presentation" class="dropdown">
+      <%= form_for :trip, url: {action: "show"}, html: {method: "get"} do |f| %>
+
+  <%= f.select :university_id, options_for_select(@universities.collect { |u|
+    [u.name.titleize, u.id] }, 0), {:include_blank=> "Üniversite Seç"}, { id: 'universities_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+
+  <%= f.select :id, options_for_select(@courses.collect { |c|
+    [c.name.titleize, c.id] },0), {:include_blank=>"Ders Seç"}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+
+
+  <%= f.submit "Bul!" ,{class:'btn btn-default btn-lg',id:'find_button'}%>
+  </li>
+<% end %>
+
+</div>
+                        </ul>
+<h2 style="text-align:center"><%=@uni.name.titleize %> - <%= @course.name.titleize %></h2>
+
+	<div class='commentsection'>
+		<% @comments.each do |c| %>
+		<div class='panel panel-success'>
+		<div class='panel-heading'>
+			<h3 class="panel-title"><%=c.user.name+" "+c.user.surname%> </h3>
+		</div>
+		<div class="panel-body">
+			<%=c.text%>
+			</div>
+		</div>
+<%end%>
+	</div>
+
+	<% if @user %>
+	<div class='addcomment'>
+	<h2 style='text-align:center'>Yorum Ekle </h2>
+
+	<%=form_for :comment, url: {action: "create"}, html:{method:"post"} do |f| %>
+	<div class="panel panel-danger">
+		<div class='panel-heading'>
+			<h3 class="panel-title"><%=@user.name%> <%=@user.surname%></h3>
+			</div>
+			<div class="panel-body">
+
+			<%=f.text_area :commentfield,:rows =>5 %>
+			<%=f.hidden_field :id,:value=>@course.id%>
+			<%=f.hidden_field :university_id,:value=>@uni.id%>
+			<%=f.submit "Ekle",:class=>'btn btn-info'%>
+			</div>
+
+			<%end%>
+			</div>
+	</div>
+	<%end%>
+<p><%=link_to 'Home Page','/'%></p>
+<p><%=link_to 'Go Back',root_path%></p>

@@ -1,57 +1,90 @@
 
 <ul class="list-inline intro-social-buttons">
-                             
+
 <div class="intro-header">
         <li role="presentation" class="dropdown">
       <%= form_for :trip, url: {action: "show"}, html: {method: "get"} do |f| %>
-    
+
   <%= f.select :university_id, options_for_select(@universities.collect { |u|
     [u.name.titleize, u.id] }, 0), {:include_blank=> "Üniversite Seç"}, { id: 'universities_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
-    
+
   <%= f.select :id, options_for_select(@courses.collect { |c|
     [c.name.titleize, c.id] },0), {:include_blank=>"Ders Seç"}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
-  
-  
+
+
   <%= f.submit "Bul!" ,{class:'btn btn-default btn-lg',id:'find_button'}%>
   </li>
-<% end %>                    
+<% end %>
 
-</div>                            
+</div>
                         </ul>
-<h2 style="text-align:center"><%=@uni.name.titleize %> - <%= @course.name.titleize %></h2>
-	
-	<div class='commentsection'>
+<h2 style="text-align:center"><%=@uni.name.titleize %> - <%= @course.name.titleize %>  <span style="color:red"> Puanı: <%=@averagepoint%></span></h2>
+	<div class='mainsection'>
+	<div class='topusers col-md-4'>
+			<div class='list-group'>
+				<%if current_user %>
+					<%@topusers.each do |t|%>
+					<div class='list-group-item'><%=User.find(t[0]).name%><span class='badge'><%=t[1]%></span></div>
+					<%end%>
+				<%else%>
+				<div class='list-group-item'>Here are listed top commenting users</div>
+				<%end%>
+			</div>
+	</div>
+	<div class='commentsection col-md-4'>
 		<% @comments.each do |c| %>
 		<div class='panel panel-success'>
 		<div class='panel-heading'>
-			<h3 class="panel-title"><%=c.user.name+" "+c.user.surname%> </h3>
+			<h3 class="panel-title"><%=c.user.name+" "+c.user.surname%></span><span style="float:right"><%=c.point%> Puan</span></h3>
+
 		</div>
 		<div class="panel-body">
 			<%=c.text%>
 			</div>
+			<div class='panel-footer'>
+			<%=c.created_at.strftime('%d-%m-%Y')%>
+      <%if c.user==current_user%>
+      <%=link_to "Yorumu Sil",{action:"delete",comment_id:c.id} ,id:"deletecomment" %>
+    <%end%>
+			</div>
 		</div>
+<%end%><% if current_user && @sameuni%>
+
+<div class='addcomment'>
+<h2 style='text-align:center'>Yorum Ekle </h2>
+
+<%=form_for :comment, url: {action: "create"}, html:{method:"post"} do |f| %>
+<div class="panel panel-danger">
+  <div class='panel-heading'>
+    <h3 class="panel-title"><%=current_user.name%> <%=current_user.surname%></h3>
+
+
+    </div>
+    <div class="panel-body">
+
+    <%=f.text_area :commentfield,:rows =>5 %>
+    <%=f.hidden_field :id,:value=>@course.id%>
+    <%=f.hidden_field :university_id,:value=>@uni.id%>
+    <%=f.select :point, options_for_select([1,2,3,4,5].collect.with_index.to_a),
+     {:include_blank=> "Puanını Ver"}, { id: 'universities_select' } %>
+
+    <%=f.submit "Ekle",:class=>'btn btn-info'%>
+    </div>
+
+    <%end%>
+    </div>
+</div>
+
 <%end%>
 	</div>
 
-	<div class='addcomment'>
-	<h2 style='text-align:center'>Yorum Ekle </h2>
-	
-	<%=form_for :comment, url: {action: "create"}, html:{method:"post"} do |f| %>
-	<div class="panel panel-danger">
-		<div class='panel-heading'>
-			<h3 class="panel-title">Atakan Yenel</h3>
-			</div>
-			<div class="panel-body"> 
-			
-			<%=f.text_area :commentfield,:rows =>5 %>
-			<%=f.hidden_field :id,:value=>@course.id%>
-			<%=f.hidden_field :university_id,:values=>@uni.id%>
-			<%=f.submit "Ekle",:class=>'btn btn-info'%>
-			</div>
-				
-			<%end%>
-			</div>
-	</div>
+	<div class='othercourses col-md-4' style='float:right'>
+	<div class="list-group">
 
-<p><%=link_to 'Home Page','/'%></p>	
-<p><%=link_to 'Go Back',root_path%></p>
+		<%@courses_in_same_uni.each do |s|%>
+		<a href=<%="/show/#{s.id}"%> class='list-group-item'><%=s.name %><span class='badge'><%=s.comment.count %></span> </a>
+		<%end%>
+
+	</div>
+	</div>
+	</div>

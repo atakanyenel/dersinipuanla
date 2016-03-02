@@ -9,17 +9,39 @@ Rails.application.routes.draw do
   get '/' => 'pages#home'
   get '/update_cities' => 'pages#update_cities'
 
-  get '/show' => 'pages#show'
+	post '/create'=>"pages#create"
 
-  post '/show'=> 'pages#create'
+	get '/show' => 'pages#show'
+
+  get '/show/:courseid'=>'pages#show'
+
+  post '/show'=> 'pages#show'
 
   get '/signup'=>'user#signup'
 
   post '/create'=>'user#create'
 
   get '/login'=>'user#login'
+
   post '/login'=>'user#login'
-  # Example of regular route:
+
+  get '/logout'=>'user#logout'
+
+	get '/checkcode'=>'user#checkcode'
+
+	post '/checkcode' =>'user#checkcode'
+
+	 get 'auth/:provider/callback'=> 'user#signup'
+
+	 get "/delete/:comment_id"=>"pages#delete"
+
+	 get "/addcourse"=>"pages#addcourse"
+
+	 post "/addcourse"=>"pages#addcourse"
+
+	 post "/createcourse"=>"pages#createcourse"
+	 
+	# Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
