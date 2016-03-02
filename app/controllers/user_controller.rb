@@ -3,7 +3,7 @@ class UserController < ApplicationController
 
 	def signup
 		auth=request.env['omniauth.auth']
-		user= User.where(id: auth.uid).first
+		user= User.where(id: auth.uid.to_s).first
 				if user
 					session[:user_id]=user.id
 					redirect_to "/"
