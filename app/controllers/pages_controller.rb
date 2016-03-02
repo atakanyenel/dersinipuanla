@@ -21,7 +21,7 @@ class PagesController < ApplicationController
 				 		redirect_to "/"
 					end
 			else
-					@course=Course.find(params[:courseid]) # found by parameter
+					@course=Course.find_by(id: params[:courseid]) # found by parameter
 			end
 
 			@title=@course.name

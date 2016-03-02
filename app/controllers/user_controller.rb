@@ -21,7 +21,7 @@ class UserController < ApplicationController
 	def login
 		if request.post?
 			@user=User.where('name=? and surname=?',params[:user][:firstname],params[:user][:lastname]).first
-			#UserNotifier.send_signup_email(@user,random).deliver
+			UserNotifier.send_signup_email(@user,random).deliver
 			if @user
 				flash[:danger] = 'Logged in'
 				session[:user_id]=@user.id
