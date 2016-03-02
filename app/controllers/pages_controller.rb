@@ -49,7 +49,7 @@ class PagesController < ApplicationController
 		@NewComment=Comment.new
 		@NewComment.course_id=params[:comment][:id]
 		@NewComment.text=params[:comment][:commentfield]
-		@NewComment.user_id=session[:user_id]
+		@NewComment.user_id=session[:user_id].to_s
 		if params[:comment][:point].to_i<5
 				@NewComment.point=params[:comment][:point].to_f+1
 				if @NewComment.save
