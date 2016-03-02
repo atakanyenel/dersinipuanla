@@ -50,7 +50,7 @@ class PagesController < ApplicationController
 		@NewComment.course_id=params[:comment][:id]
 		@NewComment.text=params[:comment][:commentfield]
 		@NewComment.user_id=session[:user_id]
-		if params[:comment][:point]<5
+		if params[:comment][:point].to_i<5
 				@NewComment.point=params[:comment][:point].to_f+1
 				if @NewComment.save
 						redirect_to "/show/#{params[:comment][:id]}"
