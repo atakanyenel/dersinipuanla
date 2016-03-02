@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get '/signup'=>'user#signup'
 
-  post '/create'=>'user#create'
+  post '/createuser'=>'user#createuser'
 
   get '/login'=>'user#login'
 
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 	 post "/addcourse"=>"pages#addcourse"
 
 	 post "/createcourse"=>"pages#createcourse"
-	 
+
 	# Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

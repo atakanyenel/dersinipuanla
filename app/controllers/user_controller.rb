@@ -10,10 +10,10 @@ class UserController < ApplicationController
 				else
 				puts auth
 				puts auth.extra.raw_info
-				user=User.new
+				@user=User.new
 	  		session[:facebook_id]      = auth.uid
-	    	user.name     = auth.extra.raw_info.first_name
-				user.surname= auth.extra.raw_info.last_name
+	    	@user.name     = auth.extra.raw_info.first_name
+				@user.surname= auth.extra.raw_info.last_name
 
 			end
 		end
@@ -37,13 +37,13 @@ class UserController < ApplicationController
 
 	end
 
-	def create
+	def createuser
 
 		if 1
 			session[:firstname]=params[:user][:firstname]
 			session[:lastname]=params[:user][:lastname]
 			session[:email]=params[:user][:email]
-			session[:university_id]=params[:user][:university_mail]
+			session[:university_id]=params[:user][:university_id]
 			random=rand(36**8).to_s(36)
 			session[:random]=random
 
