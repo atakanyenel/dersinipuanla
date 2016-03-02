@@ -48,7 +48,7 @@ class UserController < ApplicationController
 			random='atakan'
 			session[:random]=random
 
-			usermail=session[:email]+'@'+University.find(session[:university_id]).mail
+			usermail=session[:email]+'@'+University.find_by(id: session[:university_id]).mail
 			session[:usermail]=usermail
 			#UserNotifier.send_signup_email(session[:first_name],usermail,random).deliver
 			puts random
