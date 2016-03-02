@@ -6,5 +6,5 @@ default :from => 'atakanyenel@gmail.com'
 		@random=r
 		mail(:to =>usermail,
 			:subject => "dersinipuanla.com'a hoşgeldiniz")
-	endls
+	end
 end
