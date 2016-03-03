@@ -9,20 +9,20 @@
   <%= favicon_link_tag '/book.ico' %>
 </head>
 
-<nav class="navbar navbar-default topnav" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+                  <div class="navbar-header">
 
                 <%if current_user %>
-                <a class="navbar-brand topnav" style="font-weight:bold" href="/"><%="#{current_user.name.titleize} #{current_user.surname.titleize}"%>
+                <a class="navbar-brand" style="font-weight:bold" href="/"><%="#{current_user.name.titleize} #{current_user.surname.titleize}"%>
                 <%else%>
-                <a class="navbar-brand topnav" style="font-weight:bold" href="/">Dersini Puanla</a>
+                <a class="navbar-brand " style="font-weight:bold" href="/">Dersini Puanla</a>
                 <%end%>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav" style="float:right">
                     <%if current_user %>
                     <li>
                     <a href="/addcourse">Ders Ekle</a>
@@ -40,6 +40,7 @@
 
             <!-- /.navbar-collapse -->
         </div>
+
         <!-- /.container -->
     </nav>
 
