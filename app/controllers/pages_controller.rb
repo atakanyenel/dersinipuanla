@@ -5,8 +5,8 @@ class PagesController < ApplicationController
 
 
 		@universities=University.all
-		@courses=Course.where("university_id=?",University.first.id)
-
+		#@courses=Course.where("university_id=?",University.first.id)
+		@courses=Course.where("university_id=0")
 		@user=current_user
 
 
@@ -26,7 +26,8 @@ class PagesController < ApplicationController
 
 			@title=@course.name
 			@universities=University.all
-			@courses=Course.where("university_id=?",University.first.id)
+			#@courses=Course.where("university_id=?",University.first.id)
+			@courses=Course.where("university_id=0")
 			@uni=@course.university
 			@comments=@course.comment
 			@averagepoint=@course.comment.average(:point)
@@ -40,6 +41,7 @@ class PagesController < ApplicationController
 
 	def update_cities
 		@courses=Course.where("university_id= ?",params[:university_id]).order(:name)
+
 		respond_to do |format|
 			format.js
 		end
@@ -83,19 +85,23 @@ class PagesController < ApplicationController
 				else
 				@title="Ders Ekle"
 				@universities=University.all
-				@courses=Course.where("university_id=?",University.first.id)
-
+				#@courses=Course.where("university_id=?",University.first.id)
+					@courses=Course.where("university_id=0")
 				puts "add course"
 			end
 	end
 
 	def createcourse
 		puts "create course"
+		coursesexists=Course.where("name=? and university_id=?",params[:newcourse][:course_name].upcase,current_user.university.id)
+		if !coursesexists
 		@course=Course.new(name:params[:newcourse][:course_name].upcase, university_id:current_user.university.id)
 		@course.save
 		redirect_to "/"
-
-
+	else
+		puts 'that course exists'
+		redirect_to "/"
+	end
 	end
 
 end
