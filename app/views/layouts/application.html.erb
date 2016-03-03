@@ -13,20 +13,15 @@
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <%if current_user %>
-                <a class="navbar-brand topnav" style="font-weight:bold" href="/"><%="#{current_user.name.upcase} #{current_user.surname.upcase}"%>
+                <a class="navbar-brand topnav" style="font-weight:bold" href="/"><%="#{current_user.name.titleize} #{current_user.surname.titleize}"%>
                 <%else%>
-                <a class="navbar-brand topnav" href="/">Dersini Puanla</a>
+                <a class="navbar-brand topnav" style="font-weight:bold" href="/">Dersini Puanla</a>
                 <%end%>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
                 <ul class="nav navbar-nav navbar-right">
                     <%if current_user %>
                     <li>
@@ -40,9 +35,9 @@
                         <a href="/auth/facebook">Facebook ile giriş yap</a>
                     </li>
                     <%end%>
-                    
+
                 </ul>
-            </div>
+
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->

@@ -9,7 +9,7 @@
     [u.name.titleize, u.id] }, 0), {:include_blank=> "Üniversite Seç"}, { id: 'universities_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
 
   <%= f.select :id, options_for_select(@courses.collect { |c|
-    [c.name.titleize, c.id] },0), {:include_blank=>"Ders Seç"}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+    [c.name.upcase, c.id] },0), {:include_blank=>"Ders Seç"}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
 
 
   <%= f.submit "Bul!" ,{class:'btn btn-default btn-lg',id:'find_button'}%>

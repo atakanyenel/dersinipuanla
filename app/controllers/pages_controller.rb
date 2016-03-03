@@ -39,7 +39,7 @@ class PagesController < ApplicationController
 	end
 
 	def update_cities
-		@courses=Course.where("university_id= ?",params[:university_id])
+		@courses=Course.where("university_id= ?",params[:university_id]).order(:name)
 		respond_to do |format|
 			format.js
 		end
