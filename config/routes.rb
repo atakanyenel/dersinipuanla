@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 	post '/checkcode' =>'user#checkcode'
 
 	 get 'auth/:provider/callback'=> 'user#signup'
+   
+   get "auth/failure"=> "pages#home"
 
 	 get "/delete/:comment_id"=>"pages#delete"
 

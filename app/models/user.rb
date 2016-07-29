@@ -4,18 +4,23 @@ class User < ActiveRecord::Base
 	has_many :comment
 	belongs_to :university
 
+#FACEBOOK
+
 
 	def self.omniauth(auth)
-  where(id: auth.uid).first_or_create do |user|
-    	puts auth
-			puts auth.extra.raw_info
-    	#user.provider = auth.provider
-    	user.id      = auth.uid
-    	user.name     = auth.extra.raw_info.first_name
-			user.surname= auth.extra.raw_info.last_name
-
-
-	  end
-	end
-
+  		where(provider: auth.provider,uid: auth.uid).first_or_initialize.tap do |user|
+	#user.provider=auth.provider
+	puts "===AUTH==="
+	puts auth
+	puts "===AUTH==="
+	puts auth.info
+	user.id=auth.uid
+	user.name=auth.info.name
+	user.surname="surname"
+	#user.oauth_token=auth.credentials.token
+	#user.oauth_expires_at=Time.at(auth.credentials.expires_at)
+	user.save!
+  		end
+	end  	
 end
+

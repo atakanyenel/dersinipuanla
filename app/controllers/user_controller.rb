@@ -1,27 +1,43 @@
 
 class UserController < ApplicationController
 
+
+
 	def signup
-		auth=request.env['omniauth.auth']
-		user= User.where(id: auth.uid.to_s).first
-				if user
-					session[:user_id]=user.id
-					redirect_to "/"
+			auth=request.env['omniauth.auth'] # FIXME direkt sabancıya bağlansın
+			user=User.where(id: auth.uid.to_s).first
+			puts "===AUTH==="
+			puts auth
+			puts "===AUTH==="
+			if user
+				session[:user_id]=user.id
+				redirect_to "/"
+			#elsif auth.raw_info.hd!="sabanciuniv.edu"
+			#	flash[:danger]="Sign in with sabanciuniv.edu"
+			#	redirect_to "/"
+			else
+				user_mail=auth.info.email
+				username=user_mail.partition("@").first
+				user_ext=user_mail.partition("@").last
+				if user_ext=="sabanciuniv.edu" #sabancı öğrencisi
+					user=User.new
+					session[:user_id]=auth.uid
+					user.id=auth.uid
+					user.name=username
+					user.email=user_mail
+					user.university_id=1 #FIXME constant sabancı için
+					user.surname="surname"
+					user.save!
 				else
-				puts auth
-				puts auth.extra.raw_info
-				@user=User.new
-	  		session[:facebook_id]      = auth.uid
-	    	@user.name     = auth.extra.raw_info.first_name
-				@user.surname= auth.extra.raw_info.last_name
-
-			end
+					flash[:danger]="sign in sabancı"
+				end
+				redirect_to "/"
 		end
-
+	end
 	def login
 		if request.post?
 			@user=User.where('name=? and surname=?',params[:user][:firstname],params[:user][:lastname]).first
-			UserNotifier.send_signup_email(@user,random).deliver
+			UserNotifier.send_signup_email(@user,random).deliver # FIXME buna gerek yok sanırım
 			if @user
 				flash[:danger] = 'Logged in'
 				session[:user_id]=@user.id

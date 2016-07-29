@@ -20,7 +20,8 @@ Rails.application.configure do
   ENV['FACEBOOK_SECRET']="1dbf440594b42d370e593c40ec259f4e"
   ENV['GMAIL_USERNAME']="atakanyenel"
   ENV['GMAIL_PASSWORD']="Fsociety4"
-
+  ENV["G_CLIENT"]="254576064812-j69mn89l1appefov8sva3fjrvav9m47q.apps.googleusercontent.com"
+  ENV["G_SECRET"]="LmeSs-WQWt3JsTMZLbOq39Zi"
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

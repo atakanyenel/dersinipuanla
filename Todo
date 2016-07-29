@@ -9,3 +9,11 @@
 *gemfile bootstrap added
 
 Problems with dropdowns ==> application.js updated ==> move //= require jquery below //=require bootstrap
+
+# TODO gmail controller yaz
+
+client id:
+254576064812-j69mn89l1appefov8sva3fjrvav9m47q.apps.googleusercontent.com
+
+secret:
+LmeSs-WQWt3JsTMZLbOq39Zi
