@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer  "course_id",              null: false
     t.text     "text",                   null: false
     t.integer  "point",                  null: false
-    t.string   "user_id",    limit: 200, null: false
+    t.string   "user_id",    limit: 30, null: false
     t.datetime "created_at",             null: false
   end
 
@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "mail", limit: 30, null: false
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: true, id: false do |t|
     t.string  "name",          limit: 30, null: false
     t.string  "email",         limit: 60, null: false
     t.integer "university_id",            null: false
+    t.string  "id",          limit: 30, null: false
   end
 
 end
