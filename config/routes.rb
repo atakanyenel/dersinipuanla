@@ -17,19 +17,7 @@ Rails.application.routes.draw do
 
   post '/show'=> 'pages#show'
 
-  get '/signup'=>'user#signup'
-
-  post '/createuser'=>'user#createuser'
-
-  get '/login'=>'user#login'
-
-  post '/login'=>'user#login'
-
   get '/logout'=>'user#logout'
-
-	get '/checkcode'=>'user#checkcode'
-
-	post '/checkcode' =>'user#checkcode'
 
 	 get 'auth/:provider/callback'=> 'user#signup'
    
