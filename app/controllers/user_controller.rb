@@ -26,7 +26,7 @@ class UserController < ApplicationController
 					user.name=username
 					user.email=user_mail
 					user.university_id=1 #FIXME constant sabancı için
-					user.surname="surname"
+					
 					user.save!
 				else
 					flash[:danger]="sign in sabancı"

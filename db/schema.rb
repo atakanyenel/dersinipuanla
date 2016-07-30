@@ -14,8 +14,11 @@
 ActiveRecord::Schema.define(version: 0) do
 
   create_table "comments", force: true do |t|
-    t.integer "course_id", null: false
-    t.text    "text",      null: false
+    t.integer  "course_id",              null: false
+    t.text     "text",                   null: false
+    t.integer  "point",                  null: false
+    t.string   "user_id",    limit: 200, null: false
+    t.datetime "created_at",             null: false
   end
 
   create_table "courses", force: true do |t|
@@ -27,15 +30,13 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "universities", force: true do |t|
     t.string "name", limit: 80, null: false
+    t.string "mail", limit: 30, null: false
   end
 
   create_table "users", force: true do |t|
-    t.string  "email",    limit: 60, null: false
-    t.string  "nickname", limit: 15, null: false
-    t.string  "password", limit: 15, null: false
-    t.integer "school",              null: false
+    t.string  "name",          limit: 30, null: false
+    t.string  "email",         limit: 60, null: false
+    t.integer "university_id",            null: false
   end
-
-  add_index "users", ["nickname"], name: "nickname", unique: true, using: :btree
 
 end
