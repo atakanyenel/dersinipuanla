@@ -6,10 +6,10 @@
       <%= form_for :trip, url: {action: "show"}, html: {method: "get"} do |f| %>
 
   <%= f.select :university_id, options_for_select(@universities.collect { |u|
-    [u.name.titleize, u.id] }, 0), {:include_blank=> "Üniversite Seç"}, { id: 'universities_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+    [u.name.titleize, u.id] }, 1), {:include_blank=> "Üniversite Seç"}, { id: 'universities_select',class:'dropdown-toggle btn btn-default btn-lg disabled' } %>
 
   <%= f.select :id, options_for_select(@courses.collect { |c|
-    [c.name, c.id] },0), {:include_blank=>"Ders Seç"}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
+    [c.name, c.id] },0), {}, { id: 'courses_select',class:'dropdown-toggle btn btn-default btn-lg' } %>
 
 
   <%= f.submit "Bul!" ,{class:'btn btn-default btn-lg',id:'find_button'}%>
@@ -18,7 +18,7 @@
 
 </div>
                         </ul>
-<h2 style="text-align:center"><%=@uni.name.titleize %> - <%= @course.name.titleize %>  <span style="color:red"> Puanı: <%=@averagepoint%></span></h2>
+<h2 style="text-align:center"><%=@uni.name.titleize %> - <%= @course.name.upcase %>  <span style="color:red"> Puanı: <%=@averagepoint%></span></h2>
 	<div class='mainsection'>
 	<div class='topusers col-md-4'>
 			<div class='list-group'>
@@ -35,7 +35,7 @@
 		<% @comments.each do |c| %>
 		<div class='panel panel-success'>
 		<div class='panel-heading'>
-			<h3 class="panel-title"><%=c.user.name+" "+c.user.surname%></span><span style="float:right"><%=c.point%> Puan</span></h3>
+			<h3 class="panel-title"><%=c.user.name%></span><span style="float:right"><%=c.point%> Puan</span></h3>
 
 		</div>
 		<div class="panel-body">
@@ -56,7 +56,7 @@
 <%=form_for :comment, url: {action: "create"}, html:{method:"post"} do |f| %>
 <div class="panel panel-danger">
   <div class='panel-heading'>
-    <h3 class="panel-title"><%=current_user.name%> <%=current_user.surname%></h3>
+    <h3 class="panel-title"><%=current_user.name%> </h3>
 
 
     </div>

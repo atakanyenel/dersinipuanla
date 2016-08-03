@@ -3,7 +3,7 @@ class UserController < ApplicationController
 
 	def signup
 			auth=request.env['omniauth.auth'] # FIXME direkt sabancıya bağlansın
-			user=User.where(id: auth.uid.to_s).first
+			user=User.where(uid: auth.uid.to_s).first
 			puts "===AUTH==="
 			puts auth
 			puts "===AUTH==="
@@ -19,13 +19,14 @@ class UserController < ApplicationController
 				user_ext=user_mail.partition("@").last
 				if user_ext=="sabanciuniv.edu" #sabancı öğrencisi
 					user=User.new
-					session[:user_id]=auth.uid
-					user.id=auth.uid
+					
+					user.uid=auth.uid
 					user.name=username
 					user.email=user_mail
 					user.university_id=1 #FIXME constant sabancı için
 					
 					user.save!
+					session[:user_id]=user.id
 				else
 					flash[:danger]="sign in sabancı"
 				end

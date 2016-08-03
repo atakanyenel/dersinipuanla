@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "mail", limit: 30, null: false
   end
 
-  create_table "users", force: true, id: false do |t|
+  create_table "users", force: true do |t|
     t.string  "name",          limit: 30, null: false
     t.string  "email",         limit: 60, null: false
     t.integer "university_id",            null: false
-    t.string  "id",          limit: 30, null: false
+    t.string  "uid",          limit: 30, null: false
   end
 
+  add_index "courses",["uid"],name:"uid",using: :btree
 end

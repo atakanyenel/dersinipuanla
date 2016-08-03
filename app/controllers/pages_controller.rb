@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
 		@universities=University.all
 		#@courses=Course.where("university_id=?",University.first.id)
-		@courses=Course.where("university_id=0")
+		@courses=Course.where("university_id=1").order(:name) #FIXME sabancı Constant
 		@user=current_user
 
 
@@ -27,7 +27,7 @@ class PagesController < ApplicationController
 			@title=@course.name
 			@universities=University.all
 			#@courses=Course.where("university_id=?",University.first.id)
-			@courses=Course.where("university_id=0")
+			@courses=Course.where("university_id=1").order(:name) #FIXME sabancı Constant
 			@uni=@course.university
 			@comments=@course.comment
 			@averagepoint=@course.comment.average(:point)
@@ -36,7 +36,7 @@ class PagesController < ApplicationController
 				@topusers=Comment.limit(10).group("user_id").count
 				@topusers=@topusers.sort_by{| name,num |num}.reverse!
 			end
-			@courses_in_same_uni=Course.where('university_id= ?',@uni)
+			@courses_in_same_uni=Course.where('university_id= ?',@uni).order(:name)
 	end
 
 	def update_cities
