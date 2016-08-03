@@ -28,7 +28,7 @@ class UserController < ApplicationController
 					user.save!
 					session[:user_id]=user.id
 				else
-					flash[:danger]="sign in sabancı"
+					flash[:alert]="Lütfen Sabancı mailiniz ile giriş yapın."
 				end
 				redirect_to "/"
 		end

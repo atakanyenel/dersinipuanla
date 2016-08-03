@@ -22,7 +22,7 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
 
-                <ul class="nav navbar-nav" style="float:right">
+                <ul class="nav navbar-nav navbar-right">
                     <%if current_user %>
                     <li>
                     <a href="/addcourse">Ders Ekle</a>
@@ -31,10 +31,15 @@
                     <a href="/logout">Çıkış Yap</a>
                     </li>
                     <%else%>
+                        <% if flash[:alert]%>
+                        <li> <a style="color:blue">Sadece Sabancı Mailin ile giriş yapabilirsin </a>
+                        </li>
+                        <%end%>
                     <li>
                         <a href="/auth/google_oauth2"><b>Mail adresin ile giriş yap</b></a>
                         
                     </li>
+
                     <%end%>
 
                 </ul>
