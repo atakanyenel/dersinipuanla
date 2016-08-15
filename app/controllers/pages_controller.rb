@@ -86,22 +86,23 @@ class PagesController < ApplicationController
 				@title="Ders Ekle"
 				@universities=University.all
 				#@courses=Course.where("university_id=?",University.first.id)
-					@courses=Course.where("university_id=0")
+					@courses=Course.where("university_id=1").order(:name)
 				puts "add course"
 			end
 	end
 
 	def createcourse
 		puts "create course"
-		coursesexists=Course.where("name=? and university_id=?",params[:newcourse][:course_name].upcase,current_user.university.id)
-		if !coursesexists
-		@course=Course.new(name:params[:newcourse][:course_name].upcase, university_id:current_user.university.id)
-		@course.save
-		redirect_to "/"
-	else
-		puts 'that course exists'
-		redirect_to "/"
-	end
+		coursesexists=Course.where(:name=>params[:newcourse][:course_name].upcase, :university_id=> current_user.university.id)
+		puts coursesexists.length
+		if coursesexists.length==0
+			@course=Course.new(name:params[:newcourse][:course_name].upcase, university_id:current_user.university.id)
+			@course.save
+			redirect_to "/"
+		else
+			puts 'that course exists'
+			redirect_to "/"
+		end
 	end
 
 end
